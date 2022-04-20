@@ -9,8 +9,25 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="5dp"
+    android:padding="2dp"
     tools:context=".screens.MovieFragment">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title="Title"
+            app:menu="@menu/movie_menu"
+            app:navigationIcon="@drawable/ic_back"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary"
+            />
+
+    </com.google.android.material.appbar.AppBarLayout>
 
     <ImageView
         android:id="@+id/poster"
@@ -37,7 +54,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
-        android:layout_marginRight="1dp"
+        android:layout_marginRight="5dp"
         android:text="6.9"
         android:textSize="15sp"
         app:layout_constraintTop_toBottomOf="@id/title"
@@ -80,18 +97,27 @@
 
     <TextView
         android:id="@+id/description"
-        android:maxLines="4"
+        android:maxLines="10"
         android:ellipsize="end"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:padding="3dp"
-        android:text="Допустим, есть TextView, состоящий из 20 строк. Я же хочу, чтобы в Activity отображалась только часть (например, 3 строчки), а остальное появлялось в этом же Activity при нажатии на текст. Как это можно сделать? Я знаю, что это можно сделать, обрезав текст и обработать нажатие на TextView, показав при нажатии текст полностью. А есть ли другие инструменты (может быть, что-то есть уже встроенное)?Допустим, есть TextView, состоящий из 20 строк. Я же хочу, чтобы в Activity отображалась только часть (например, 3 строчки), а остальное появлялось в этом же Activity при нажатии на текст. Как это можно сделать? Я знаю, что это можно сделать, обрезав текст и обработать нажатие на TextView, показав при нажатии текст полностью. А есть ли другие инструменты (может быть, что-то есть уже встроенное)?"
+        android:text="Description"
         android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@id/countries_duration_age"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         />
+    <Button
+        android:id="@+id/descriptionBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/description"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:text="Все детали >"
+        android:textSize="10sp"/>
     <TextView
         android:id="@+id/rating_kinopoisk_title"
         android:layout_width="match_parent"
@@ -99,7 +125,7 @@
         android:layout_marginTop="5dp"
         android:text="Рейтинг Кинопоиска"
         android:textSize="15sp"
-        app:layout_constraintTop_toBottomOf="@id/description"
+        app:layout_constraintTop_toBottomOf="@id/descriptionBtn"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         />
@@ -116,7 +142,7 @@
         app:cardCornerRadius="5dp"
         >
         <TextView
-            android:id="@+id/kinopoisk_votes"
+            android:id="@+id/rating_kinopoisk_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="8.4"
@@ -124,7 +150,7 @@
             android:gravity="center_vertical|center_horizontal|top"
             />
         <TextView
-            android:id="@+id/rating_kinopoisk_number"
+            android:id="@+id/kinopoisk_votes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="314 346 оценок"

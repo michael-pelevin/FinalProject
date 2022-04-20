@@ -1,11 +1,18 @@
 package com.example.finalapp.screens
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
+import com.example.finalapp.Movie
+import com.example.finalapp.MovieViewModel
 import com.example.finalapp.R
 
 //{
@@ -102,10 +109,14 @@ import com.example.finalapp.R
 //    "seasons": "4"
 //}
 class MovieFragment : Fragment() {
+
+    lateinit var viewModel: MovieViewModel
+
+    private val movie = Movie.getMovies()[0]
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-        }
+        viewModel = ViewModelProvider(this)[MovieViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -116,24 +127,48 @@ class MovieFragment : Fragment() {
         return inflater.inflate(R.layout.movie_fragment, container, false)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val descriptionView = view.findViewById<TextView>(R.id.description)
-        descriptionView.setOnClickListener {
-            descriptionView.setMaxLines(Int.MAX_VALUE)
+        val title = view.findViewById<TextView>(R.id.title)
+        val rating_kinopoisk = view.findViewById<TextView>(R.id.rating_kinopoisk)
+        val title_alternative = view.findViewById<TextView>(R.id.title_alternative)
+        val poster = view.findViewById<ImageView>(R.id.poster)
+        val year_and_genres_seasons = view.findViewById<TextView>(R.id.year_and_genres_seasons)
+        val countries_duration_age = view.findViewById<TextView>(R.id.countries_duration_age)
+        val description = view.findViewById<TextView>(R.id.description)
+        val kinopoisk_votes = view.findViewById<TextView>(R.id.kinopoisk_votes)
+        val rating_kinopoisk_number = view.findViewById<TextView>(R.id.rating_kinopoisk_number)
+
+        val btn = view.findViewById<Button>(R.id.descriptionBtn)
+
+        viewModel.setMovieData(movie)
+        val data = viewModel.movieData
+
+        title.text = data.value?.title.toString()
+        rating_kinopoisk.text = data.value?.rating_kinopoisk.toString()
+        year_and_genres_seasons.text = data.value?.year.toString()+ ", "+ data.value?.seasons.toString()+ " сезона"
+        title_alternative.text = data.value?.title_alternative.toString()
+        countries_duration_age.text = data.value?.countries.toString()
+        description.text = data.value?.description.toString()
+        kinopoisk_votes.text = data.value?.kinopoisk_votes.toString()+ " оценок"
+        rating_kinopoisk_number.text = data.value?.rating_kinopoisk.toString()
+
+        Glide.with(poster.context).load("https://st.kp.yandex.net/im/kadr/3/4/1/kinopoisk.ru-Stranger-Things-3413471.jpg").centerCrop().into(poster)
+        val receiverFragment = DescriptionFragment.newInstance(data.value?.description.toString())
+        btn.setOnClickListener {
+            val transaction = requireActivity().supportFragmentManager.beginTransaction()
+            transaction.replace(R.id.content_container, receiverFragment).addToBackStack(null)
+            transaction.commit()
         }
+
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment MovieFragment.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance() = MovieFragment()
     }

@@ -19,7 +19,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        replaceFragment(mainFragment)
+        if(savedInstanceState == null){
+            replaceFragment(mainFragment)
+        }
         val bottom_navigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
 
         bottom_navigation.setOnNavigationItemSelectedListener{
@@ -35,7 +37,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun replaceFragment(fragment: Fragment){
         if(fragment != null){
-            val transaction = supportFragmentManager.beginTransaction()
+            val transaction = supportFragmentManager.beginTransaction().addToBackStack(null)
             transaction.replace(R.id.content_container, fragment)
             transaction.commit()
         }
