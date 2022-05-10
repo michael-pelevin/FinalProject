@@ -1,12 +1,11 @@
 package com.example.finalapp
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
+import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.finalapp.screens.BookmarksFragment
 import com.example.finalapp.screens.MainFragment
-import com.example.finalapp.screens.MovieFragment
 import com.example.finalapp.screens.SearchFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -41,5 +40,14 @@ class MainActivity : AppCompatActivity() {
             transaction.replace(R.id.content_container, fragment)
             transaction.commit()
         }
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.getItemId()) {
+            android.R.id.home -> {
+                super.onBackPressed()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

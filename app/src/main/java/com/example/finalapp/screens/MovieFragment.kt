@@ -1,6 +1,7 @@
 package com.example.finalapp.screens
 
 import android.annotation.SuppressLint
+import android.app.ActionBar
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,9 +12,11 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.example.finalapp.MainActivity
 import com.example.finalapp.Movie
 import com.example.finalapp.MovieViewModel
 import com.example.finalapp.R
+
 
 //{
 //    "id_kinopoisk": 915196,
@@ -112,17 +115,25 @@ class MovieFragment : Fragment() {
 
     lateinit var viewModel: MovieViewModel
 
+    lateinit var bookmarkModel: BookmarksViewModel
+
     private val movie = Movie.getMovies()[0]
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(this)[MovieViewModel::class.java]
+        bookmarkModel = ViewModelProvider(this)[BookmarksViewModel::class.java]
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val actionBar: androidx.appcompat.app.ActionBar? = (activity as MainActivity?)!!.supportActionBar
+        if (actionBar != null) {
+            actionBar.setHomeButtonEnabled(true)
+            actionBar.setDisplayHomeAsUpEnabled(true)
+        }
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.movie_fragment, container, false)
     }
@@ -142,6 +153,8 @@ class MovieFragment : Fragment() {
 
         val btn = view.findViewById<Button>(R.id.descriptionBtn)
 
+        val bookmark = view.findViewById<ImageView>(R.id.bookmark_btn)
+
         viewModel.setMovieData(movie)
         val data = viewModel.movieData
 
@@ -154,12 +167,15 @@ class MovieFragment : Fragment() {
         kinopoisk_votes.text = data.value?.kinopoisk_votes.toString()+ " оценок"
         rating_kinopoisk_number.text = data.value?.rating_kinopoisk.toString()
 
-        Glide.with(poster.context).load("https://st.kp.yandex.net/im/kadr/3/4/1/kinopoisk.ru-Stranger-Things-3413471.jpg").centerCrop().into(poster)
-        val receiverFragment = DescriptionFragment.newInstance(data.value?.description.toString())
+        Glide.with(this).load("https://st.kp.yandex.net/im/kadr/3/4/1/kinopoisk.ru-Stranger-Things-3413471.jpg").centerCrop().into(poster)
+        val descriptionFragment = DescriptionFragment.newInstance(data.value?.description.toString())
         btn.setOnClickListener {
             val transaction = requireActivity().supportFragmentManager.beginTransaction()
-            transaction.replace(R.id.content_container, receiverFragment).addToBackStack(null)
+            transaction.replace(R.id.content_container, descriptionFragment).addToBackStack(null)
             transaction.commit()
+        }
+        bookmark.setOnClickListener{
+            bookmarkModel.addMovieToBookmarks(movie)
         }
 
     }

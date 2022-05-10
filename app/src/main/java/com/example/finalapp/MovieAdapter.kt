@@ -17,22 +17,21 @@ class MovieAdapter: RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
         val movieLogo: ImageView = itemView.findViewById(R.id.movie_logo)
         val title: TextView = itemView.findViewById(R.id.movie_title)
         val alternativeTitle: TextView = itemView.findViewById(R.id.alternative_title_and_year)
-        val deleteBtn: ImageView = itemView.findViewById(R.id.delete_movie_btn)
+//        val deleteBtn: ImageView = itemView.findViewById(R.id.delete_movie_btn)
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.movie_list_item, parent, false)
         return MovieViewHolder(view)
     }
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "ResourceType")
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         val movie = movies[position]
         with(holder){
             title.text = movie.title
             alternativeTitle.text = movie.title_alternative + ", "+ movie.year
-            Glide.with(movieLogo.context).load(movie.poster).centerCrop()
-                .into(movieLogo)
 
+            Glide.with(holder.itemView.getContext()).load(movie.poster.toString()).centerCrop().into(movieLogo)
         }
 
     }

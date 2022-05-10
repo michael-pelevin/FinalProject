@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/movie_logo"
         android:layout_width="70dp"
         android:layout_height="90dp"
@@ -35,16 +35,16 @@
         android:text="Movie name"
         android:textSize="18sp"
         />
-    <ImageView
-        android:id="@+id/delete_movie_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/movie_title"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:src="@drawable/ic_close"
-        />
+<!--    <ImageView-->
+<!--        android:id="@+id/delete_movie_btn"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintLeft_toRightOf="@id/movie_title"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        android:src="@drawable/ic_close"-->
+<!--        />-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
