@@ -1,4 +1,4 @@
-package com.example.finalapp.screens
+package com.example.finalapp.screens.search
 
 import androidx.lifecycle.ViewModel
 

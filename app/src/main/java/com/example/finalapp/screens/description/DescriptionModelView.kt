@@ -1,4 +1,4 @@
-package com.example.finalapp.screens
+package com.example.finalapp.screens.description
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

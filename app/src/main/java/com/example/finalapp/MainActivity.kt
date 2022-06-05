@@ -4,9 +4,9 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.example.finalapp.screens.BookmarksFragment
-import com.example.finalapp.screens.MainFragment
-import com.example.finalapp.screens.SearchFragment
+import com.example.finalapp.screens.bookmarks.BookmarksFragment
+import com.example.finalapp.screens.main.MainFragment
+import com.example.finalapp.screens.search.SearchFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {

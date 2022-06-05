@@ -1,7 +1,6 @@
-package com.example.finalapp.screens
+package com.example.finalapp.screens.movie
 
 import android.annotation.SuppressLint
-import android.app.ActionBar
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +15,8 @@ import com.example.finalapp.MainActivity
 import com.example.finalapp.Movie
 import com.example.finalapp.MovieViewModel
 import com.example.finalapp.R
+import com.example.finalapp.screens.bookmarks.BookmarksViewModel
+import com.example.finalapp.screens.description.DescriptionFragment
 
 
 //{

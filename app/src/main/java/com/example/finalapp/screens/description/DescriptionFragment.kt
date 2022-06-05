@@ -1,4 +1,4 @@
-package com.example.finalapp.screens
+package com.example.finalapp.screens.description
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,9 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
-import com.example.finalapp.MovieViewModel
 import com.example.finalapp.R
 
 class DescriptionFragment : Fragment() {

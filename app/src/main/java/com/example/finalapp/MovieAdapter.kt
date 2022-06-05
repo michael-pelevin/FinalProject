@@ -11,7 +11,7 @@ import com.bumptech.glide.Glide
 
 class MovieAdapter: RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
-    private val movies = Movie.getMovies()
+    private var movies = Movie.getMovies()
 
     class MovieViewHolder(itemView: View): RecyclerView.ViewHolder (itemView){
         val movieLogo: ImageView = itemView.findViewById(R.id.movie_logo)
@@ -38,5 +38,15 @@ class MovieAdapter: RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
     override fun getItemCount(): Int {
         return movies.size
+    }
+
+    fun clear() {
+        movies = emptyList<Movie>()
+        notifyDataSetChanged()
+    }
+
+    fun addAll() {
+        movies = Movie.getMovies().shuffled()
+        notifyDataSetChanged()
     }
 }
