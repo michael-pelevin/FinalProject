@@ -38,7 +38,7 @@ data class Movie(
             Movie(
                 915196,
                 "tv-series",
-                "Очень странные дела",
+                "Очень странные дела 1",
                 "Stranger Things",
                 "https://st.kp.yandex.net/im/kadr/3/4/1/kinopoisk.ru-Stranger-Things-3413471.jpg",
                 arrayOf("Ужасы", "Фантастика", "Фэнтези", "Триллер", "Драма", "Детектив"),
@@ -52,7 +52,7 @@ data class Movie(
             Movie(
                 915197,
                 "tv-series",
-                "Очень странные дела",
+                "Очень странные дела 2",
                 "Stranger Things",
                 "https://st.kp.yandex.net/im/kadr/3/4/1/kinopoisk.ru-Stranger-Things-3413471.jpg",
                 arrayOf("Ужасы", "Фантастика", "Фэнтези", "Триллер", "Драма", "Детектив"),
@@ -66,7 +66,7 @@ data class Movie(
             Movie(
                 915198,
                 "tv-series",
-                "Очень странные дела",
+                "Очень странные дела 3",
                 "Stranger Things",
                 "https://st.kp.yandex.net/im/kadr/3/4/1/kinopoisk.ru-Stranger-Things-3413471.jpg",
                 arrayOf("Ужасы", "Фантастика", "Фэнтези", "Триллер", "Драма", "Детектив"),
