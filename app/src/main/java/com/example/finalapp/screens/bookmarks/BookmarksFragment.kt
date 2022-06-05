@@ -1,21 +1,25 @@
-package com.example.finalapp.screens
+package com.example.finalapp.screens.bookmarks
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.finalapp.MovieAdapter
 import com.example.finalapp.R
+
 
 class BookmarksFragment : Fragment() {
 
     private lateinit var viewModel: BookmarksViewModel
+    var swipeRefreshLayout: SwipeRefreshLayout? = null
+    private lateinit var adapter: MovieAdapter
 
-    private val movieAdapter = MovieAdapter()
+    lateinit var recyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,9 +41,22 @@ class BookmarksFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val recyclerView = view.findViewById<RecyclerView>(R.id.bookmarks_recycler)
+        recyclerView = view.findViewById<RecyclerView>(R.id.bookmarks_recycler)
         recyclerView.layoutManager = LinearLayoutManager(view.context)
-        recyclerView.adapter = movieAdapter
+        adapter = MovieAdapter()
+        recyclerView.adapter = adapter
+
+        swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout)
+
+        swipeRefreshLayout!!.setOnRefreshListener {
+            swipeRefreshLayout!!.isRefreshing = false
+            updateList()
+        }
+    }
+    fun updateList() {
+        adapter.clear()
+        adapter.addAll()
+        recyclerView.adapter = adapter
     }
 
 }
